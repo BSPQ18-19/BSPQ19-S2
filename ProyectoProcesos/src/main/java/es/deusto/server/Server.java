@@ -10,9 +10,9 @@ import javax.jdo.Query;
 import javax.jdo.JDOHelper;
 import javax.jdo.Transaction;
 
-import es.deusto.server.jdo.User;
 import es.deusto.server.jdo.Usuario;
-import es.deusto.server.jdo.Message;
+
+
 
 
 public class Server extends UnicastRemoteObject implements IServer {
@@ -36,40 +36,7 @@ public class Server extends UnicastRemoteObject implements IServer {
         pm.close();
 	}
 
-	@SuppressWarnings("unchecked")
-	public String sayMessage(String login, String password, String message) throws RemoteException {
-		User user = null;
-		try{
-			tx.begin();
-			System.out.println("Creating query ...");
-			
-			
-			Query<User> q = pm.newQuery("SELECT FROM " + User.class.getName() + " WHERE login == \"" + login + "\" &&  password == \"" + password + "\"");
-			q.setUnique(true);
-			user = (User)q.execute();
-			
-			System.out.println("User retrieved: " + user);
-			if (user != null)  {
-				Message message1 = new Message(message);
-				user.getMessages().add(message1);
-				pm.makePersistent(user);					 
-			}
-			tx.commit();
-		} finally {
-			if (tx.isActive()) {
-				tx.rollback();
-			}
-		
-		}
-		
-		if (user != null) {
-			cont++;
-			System.out.println(" * Client number: " + cont);
-			return message;
-		} else {
-			throw new RemoteException("Login details supplied for message delivery are not correct");
-		} 
-	}
+	
 	
 	public void registrarUsuario(String email, String password, boolean admin) {
 		try
@@ -104,6 +71,43 @@ public class Server extends UnicastRemoteObject implements IServer {
         }
 		
 		
+	}
+
+	
+	@Override
+	public Usuario comprobarUsuario(String email,String password) {
+		// TODO Auto-generated method stub
+		PersistenceManager pm = persistentManagerFactory.getPersistenceManager();
+		pm.getFetchPlan().setMaxFetchDepth(3);
+		
+		Transaction tx = pm.currentTransaction();
+		Usuario usuario = null;
+	    
+		try {
+			
+	    	tx.begin();
+	    	
+	    	@SuppressWarnings("unchecked")
+			Query<Usuario> query = pm.newQuery("SELECT FROM " +Usuario.this.getEmail())+" WHERE email == '"+email+"'" "AND" +Usuario.this.getContrasenya());
+	    	
+	    	query.setUnique(true);
+	    	usuario = (Usuario)query.execute();	 
+			
+		
+	    	query.close();	    
+ 	    	tx.commit();
+   	    
+	     } catch (Exception ex) {
+		   	System.out.println("   $ Error recuperando usuario: " + ex.getMessage());
+	     } finally {
+		   	if (tx != null && tx.isActive()) {
+		   		tx.rollback();
+		 }
+				
+	   		pm.close();
+	     }
+
+	    return usuario;
 	}
 
 	public static void main(String[] args) {
