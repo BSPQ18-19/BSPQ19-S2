@@ -15,4 +15,5 @@ public class ProyectoBD {
 				.getPersistenceManagerFactory("datanucleus.properties");
 	}
 	
+
 }
