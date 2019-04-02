@@ -7,8 +7,8 @@ import es.deusto.server.jdo.Usuario;
 
 public interface IServer extends Remote {
 	
-	Usuario login(String email, String password) throws RemoteException;
+	Usuario comprobarUsuario(String email, String password) throws RemoteException;
 	void borrarUsuario(String usuario) throws RemoteException;
 	void registrarUsuario(String email, String password, boolean admin) throws RemoteException;
-
+	
 }
