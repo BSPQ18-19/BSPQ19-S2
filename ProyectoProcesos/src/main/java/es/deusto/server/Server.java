@@ -107,6 +107,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	    return usuario;
 	}
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		if (args.length != 3) {
 			System.out.println("How to invoke: java [policy] [codebase] Server.Server [host] [port] [server]");
@@ -120,6 +121,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		String name = "//" + args[0] + ":" + args[1] + "/" + args[2];
 
 		try {
+			
 			IServer objServer = new Server();
 			Naming.rebind(name, objServer);
 			System.out.println("Server '" + name + "' active and waiting...");

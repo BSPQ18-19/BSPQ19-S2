@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.mail.Multipart;
 import javax.mail.Session;
+import javax.mail.Address;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
@@ -143,9 +144,7 @@ public class VRegistro extends JFrame {
 				
 				//String pass = BD.olvidarContra(contra);
 
-				
-				
-				//enviarCorreo(pass, mail);
+				enviarCorreo(contra, mail);
 			}
 			
 			

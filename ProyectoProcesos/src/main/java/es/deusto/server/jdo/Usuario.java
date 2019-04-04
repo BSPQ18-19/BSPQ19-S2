@@ -1,13 +1,18 @@
 package es.deusto.server.jdo;
 
-import javax.jdo.annotations.PersistenceCapable;
+import java.io.Serializable;
 
-@PersistenceCapable
-public class Usuario {
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.PrimaryKey;
+
+@PersistenceCapable(detachable = "true")
+public class Usuario implements Serializable{
 	
+	@PrimaryKey
 	private String email;
 	private String contrasenya;
 	private boolean admin;
+	private static final long serialVersionUID = 1L;
 	
 	public Usuario(String email, String contrasenya, boolean admin) {
 		super();

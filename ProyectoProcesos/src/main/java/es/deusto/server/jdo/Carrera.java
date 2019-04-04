@@ -1,9 +1,16 @@
 package es.deusto.server.jdo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Carrera {
+
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.PrimaryKey;
+ @PersistenceCapable(detachable = "true")
+public class Carrera implements Serializable{
 	
+	@PrimaryKey
+	private String cod;
 	private String nombreC;
 	private Date fecha;
 	private String descripcion;
@@ -11,10 +18,12 @@ public class Carrera {
 	private double duracion;
 	private double precio;
 	private double premio;
+	private static final long serialVersionUID = 1L;
 	
-	public Carrera(String nombreC, Date fecha, String descripcion, String lugar, double duracion, double precio,
+	public Carrera(String cod, String nombreC, Date fecha, String descripcion, String lugar, double duracion, double precio,
 			double premio) {
 		super();
+		this.cod = cod;
 		this.nombreC = nombreC;
 		this.fecha = fecha;
 		this.descripcion = descripcion;
@@ -22,6 +31,14 @@ public class Carrera {
 		this.duracion = duracion;
 		this.precio = precio;
 		this.premio = premio;
+	}
+
+	public String getCod() {
+		return cod;
+	}
+
+	public void setCod(String cod) {
+		this.cod = cod;
 	}
 
 	public String getNombreC() {

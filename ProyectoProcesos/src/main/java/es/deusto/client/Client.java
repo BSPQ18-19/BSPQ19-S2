@@ -25,7 +25,7 @@ public class Client {
 		try {
 			String name = "//" + args[0] + ":" + args[1] + "/" + args[2];
 			//Descomentar cuando el servidor funcione!!
-			//server = (IServer) java.rmi.Naming.lookup(name);	
+			server = (IServer) java.rmi.Naming.lookup(name);	
 			// Register to be allowed to send messages
 			//objHello.registerUser("dipina", "dipina", false);
 			new Client();
