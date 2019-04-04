@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 import es.deusto.server.jdo.Usuario;
 import net.miginfocom.swing.MigLayout;
 
+
 public class VCrearUsuario extends JFrame {
 
 
@@ -95,29 +96,19 @@ public class VCrearUsuario extends JFrame {
 		btn_Registrarse.setBackground(new Color(7, 46, 113));
 		btn_Registrarse.setForeground(Color.BLACK);
 		panel.add(btn_Registrarse, "cell 3 0");
-		/*btn_Registrarse.addActionListener(new ActionListener() {
+		btn_Registrarse.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				String usuario = textField_usuario.getText();
-				String password = String.valueOf(passwordField.getPassword());
-				user = new Usuario(usuario, password, 0);
-				
-				boolean registrado = VentanaInicioo.bd.registrarUsuario(user);
-				if(registrado)
-					JOptionPane.showMessageDialog(null, "Usuario registrado con �xito", "REGISTRO OK", JOptionPane.INFORMATION_MESSAGE);
-				else
-					JOptionPane.showMessageDialog(null, "El nombre de usuario ya existe", "REGISTRO FALLIDO", JOptionPane.ERROR_MESSAGE);
 				
 				
-				VentanaCrearUsuario.this.setVisible(false);
-				VInicio vi = new VInicio();
-				vi.setVisible(true);
+				VCrearUsuario.this.setVisible(false);
+				
 				
 				
 				}
 		});
-*/
+
 	}
 }

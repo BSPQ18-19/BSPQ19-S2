@@ -6,14 +6,9 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.util.Properties;
-import java.util.logging.FileHandler;
-import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
-
 import javax.mail.Message;
 import javax.mail.Multipart;
 import javax.mail.Session;
@@ -32,8 +27,9 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-
+import es.deusto.server.jdo.Usuario;
 import net.miginfocom.swing.MigLayout;
+
 
 public class VRegistro extends JFrame {
 
@@ -52,7 +48,7 @@ public class VRegistro extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VRegistro frame = new VRegistro();
+					VRegistro frame = new VRegistro(null, null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -64,7 +60,7 @@ public class VRegistro extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VRegistro() {
+	public VRegistro(Client client, VInicio vinicio) {
 		
 		
 		
@@ -128,9 +124,8 @@ public class VRegistro extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				vinicio.setVisible(true);
 				VRegistro.this.setVisible(false);
-				VInicio vi = new VInicio();
-				vi.setVisible(true);
 			}
 		});
 		
@@ -163,7 +158,7 @@ public class VRegistro extends JFrame {
 		btnIniciarSesion.setBackground(new Color(6, 50, 113));
 		btnIniciarSesion.setForeground(Color.BLACK);
 		panel_1.add(btnIniciarSesion, "cell 2 0,alignx left,aligny top");
-		//btnIniciarSesion.addActionListener(new ActionListener() {
+		btnIniciarSesion.addActionListener(new ActionListener() {
 
 			/*
 			 * Boton iniciar sesion Comprueba en la base de datos si existe el usuario, si
@@ -171,41 +166,14 @@ public class VRegistro extends JFrame {
 			 * 
 			 */
 			
-			/*@Override
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				String usuario = textField.getText();
 				String contrasenya = String.valueOf(passwordField.getPassword());
-				Usuario user = new Usuario(usuario, contrasenya, 0);
-				int resul = BD.existeUsuario(user);
-				
-				if(resul==2){
-					if(usuario.equals("adrian")&& contrasenya.equals("adrian")){
-						log.info("El administrador ha iniciado sesión");
-					}
-					log.info(usuario+" ha iniciado sesión");
-					JOptionPane.showMessageDialog(null, "BIENVENIDO","Acceso autorizado",JOptionPane.INFORMATION_MESSAGE);
-					nomfich=usuario+".txt";
-					VentanaMenu a = new VentanaMenu(user);
-					a.setVisible(true);
-					VentanaRegistro.this.setVisible(false);
-					
-				}
-				else if(resul==1) {
-					JOptionPane.showMessageDialog(null, "CONTRASEÑA INCORRECTA","Acceso no autorizado",JOptionPane.ERROR_MESSAGE);
-				log.severe("La contrase�a insertada por "+usuario+" no ha sido correcta");
-			}else{
-					int resp = JOptionPane.showConfirmDialog(null, "¿Quieres registrarte?","USUARIO NO REGISTRADO",JOptionPane.ERROR_MESSAGE);
-					if(resp == 0){
-						log.log(Level.INFO, "Se va a registrar un nuevo usuario");
-						
-						VentanaCrearUsuario vr = new VentanaCrearUsuario(ventanaanterior);
-						vr.setVisible(true);
-						VentanaRegistro.this.setVisible(false);
-					}
-				}
-				
-			}
-		});*/
+				Usuario user = new Usuario(usuario, contrasenya, false);
+				client.iniciarSesion(usuario, contrasenya);
+			}		
+		});
 		
 	}
 				

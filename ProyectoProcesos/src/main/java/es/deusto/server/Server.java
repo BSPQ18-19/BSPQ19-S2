@@ -12,9 +12,6 @@ import javax.jdo.Transaction;
 
 import es.deusto.server.jdo.Usuario;
 
-
-
-
 public class Server extends UnicastRemoteObject implements IServer {
 
 	private static final long serialVersionUID = 1L;
@@ -77,7 +74,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	@Override
 	public Usuario comprobarUsuario(String email,String password) {
 		// TODO Auto-generated method stub
-		PersistenceManager pm = persistentManagerFactory.getPersistenceManager();
+		
 		pm.getFetchPlan().setMaxFetchDepth(3);
 		
 		Transaction tx = pm.currentTransaction();
@@ -88,7 +85,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	    	tx.begin();
 	    	
 	    	@SuppressWarnings("unchecked")
-			Query<Usuario> query = pm.newQuery("SELECT FROM " +Usuario.this.getEmail())+" WHERE email == '"+email+"'" "AND" +Usuario.this.getContrasenya());
+			Query<Usuario> query = pm.newQuery("SELECT FROM " +Usuario.class.getName()+" WHERE email == '"+email+"' AND password= '" +password+"'");
 	    	
 	    	query.setUnique(true);
 	    	usuario = (Usuario)query.execute();	 

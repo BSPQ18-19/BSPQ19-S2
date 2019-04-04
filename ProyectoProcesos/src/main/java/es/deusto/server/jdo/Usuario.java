@@ -1,24 +1,19 @@
 package es.deusto.server.jdo;
 
+import javax.jdo.annotations.PersistenceCapable;
+
+@PersistenceCapable
 public class Usuario {
-	private String nombre;
+	
 	private String email;
 	private String contrasenya;
 	private boolean admin;
 	
-	public Usuario(String nombre,String email, String contrasenya, boolean admin) {
+	public Usuario(String email, String contrasenya, boolean admin) {
 		super();
-		this.nombre=nombre;
 		this.email = email;
 		this.contrasenya = contrasenya;
 		this.admin = false;
-	}
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 
 	public String getEmail() {

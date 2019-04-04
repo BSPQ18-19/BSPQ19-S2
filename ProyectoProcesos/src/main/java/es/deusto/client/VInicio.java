@@ -29,7 +29,7 @@ public class VInicio extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VInicio frame = new VInicio();
+					VInicio frame = new VInicio(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,7 +41,7 @@ public class VInicio extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VInicio() {
+	public VInicio(Client client) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(150, 150, 457, 229);
 		contentPane = new JPanel();
@@ -75,7 +75,7 @@ public class VInicio extends JFrame {
 		btnIniSesison.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				VInicio.this.setVisible(false);
-				VRegistro vR=new VRegistro();
+				VRegistro vR=new VRegistro(client, VInicio.this);
 				vR.setVisible(true);
 			}
 		});
@@ -95,7 +95,7 @@ public class VInicio extends JFrame {
 				// TODO Auto-generated method stub
 				VInicio.this.setVisible(false);
 				
-				VCrearUsuario vCr= new VCrearUsuario(null);
+				VCrearUsuario vCr= new VCrearUsuario(VInicio.this);
 				vCr.setVisible(true);
 				
 			}
