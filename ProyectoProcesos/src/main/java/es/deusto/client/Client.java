@@ -45,4 +45,13 @@ public class Client {
 			e.printStackTrace();
 		}
 	}
+	
+	public void registrarUsuario(String email, String password) {
+		try {
+			server.registrarUsuario(email, password, false);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

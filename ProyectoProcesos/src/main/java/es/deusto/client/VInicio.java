@@ -95,7 +95,7 @@ public class VInicio extends JFrame {
 				// TODO Auto-generated method stub
 				VInicio.this.setVisible(false);
 				
-				VCrearUsuario vCr= new VCrearUsuario(VInicio.this);
+				VCrearUsuario vCr= new VCrearUsuario(client, VInicio.this);
 				vCr.setVisible(true);
 				
 			}

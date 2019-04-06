@@ -16,6 +16,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import es.deusto.server.Server;
 import es.deusto.server.jdo.Usuario;
 import net.miginfocom.swing.MigLayout;
 
@@ -36,7 +37,7 @@ public class VCrearUsuario extends JFrame {
 	 * Create the frame.
 	 * @param listaJugadores 
 	 */
-	public VCrearUsuario(VInicio ventanaanterior) {
+	public VCrearUsuario(Client client, VInicio ventanaanterior) {
 		
 		vI = ventanaanterior;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -100,12 +101,10 @@ public class VCrearUsuario extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				
+				String usuario = textField_usuario.getText();
+				String contrasenya = String.valueOf(passwordField.getPassword());
+				client.registrarUsuario(usuario, contrasenya);
 				VCrearUsuario.this.setVisible(false);
-				
-				
 				
 				}
 		});
