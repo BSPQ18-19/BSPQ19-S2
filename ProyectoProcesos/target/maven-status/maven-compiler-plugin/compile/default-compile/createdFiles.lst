@@ -4,9 +4,7 @@ es\deusto\client\VRegistro$2.class
 es\deusto\server\IServer.class
 es\deusto\server\jdo\Usuario.class
 es\deusto\client\VCrearUsuario$2.class
-es\deusto\client\VRegistro$4.class
 es\deusto\client\VCrearUsuario$1.class
-es\deusto\client\VInicio$3.class
 es\deusto\client\VInicio.class
 es\deusto\server\jdo\Carrera.class
 es\deusto\client\VCrearUsuario.class

@@ -42,33 +42,11 @@ public class VRegistro extends JFrame {
 	public static String nomfich;
 
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VRegistro frame = new VRegistro(null, null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
 	public VRegistro(Client client, VInicio vinicio) {
-		
-		
-		
-		
-		
-		
-		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(150, 150, 524, 303);
@@ -168,9 +146,14 @@ public class VRegistro extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String usuario = textField.getText();
+				System.out.println(usuario);
 				String contrasenya = String.valueOf(passwordField.getPassword());
-				Usuario user = new Usuario(usuario, contrasenya, false);
-				client.iniciarSesion(usuario, contrasenya);
+				Usuario user=client.iniciarSesion(usuario, contrasenya);
+				if(user!=null) {
+					JOptionPane.showMessageDialog(VRegistro.this, "Inicio Sesion Correcto");
+				}else {
+					JOptionPane.showMessageDialog(VRegistro.this, "Inicio Sesion Inorrecto");
+				}
 			}		
 		});
 		

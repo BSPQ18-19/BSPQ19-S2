@@ -17,48 +17,36 @@ public class Server extends UnicastRemoteObject implements IServer {
 
 	private static final long serialVersionUID = 1L;
 	private int cont = 0;
-	private PersistenceManager pm=null;
-	private Transaction tx=null;
+	private PersistenceManagerFactory pmf=null;
+	
 
 	protected Server() throws RemoteException {
 		super();
-		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
-		this.pm = pmf.getPersistenceManager();
-		this.tx = pm.currentTransaction();
+		pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+		
+		
 	}
 	
-	protected void finalize () throws Throwable {
-		if (tx.isActive()) {
-            tx.rollback();
-        }
-        pm.close();
-	}
-
+	
 	
 	
 	public void registrarUsuario(String email, String password, boolean admin) {
+		
+		PersistenceManager pm = pmf.getPersistenceManager();
+		pm.getFetchPlan().setMaxFetchDepth(3);
+		
+		Transaction tx = pm.currentTransaction();
+		
 		try
         {	
             tx.begin();
-            System.out.println("Comprobando si ya existe el usuario");
-			Usuario usuario = null;
-			try {
-				usuario = pm.getObjectById(Usuario.class, email);
-			} catch (javax.jdo.JDOObjectNotFoundException jonfe) {
-				System.out.println("Exception launched: " + jonfe.getMessage());
-			}
-			System.out.println("User: " + usuario.getEmail());
-			if (usuario.getEmail() != null) {
-				System.out.println("Usuario ya existe");
-				JOptionPane.showMessageDialog(null, "Usuario ya existe");
-				
-			} else {
+           
 				System.out.println("Creating user: " + email);
-				usuario = new Usuario(email, password, admin);
+				Usuario usuario = new Usuario(email, password, admin);
 				pm.makePersistent(usuario);					 
 				System.out.println("User created: " + email);
 				JOptionPane.showMessageDialog(null, "Usuario creado para " + email);
-			}
+			
 			tx.commit();
         }
         finally
@@ -77,7 +65,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	@Override
 	public Usuario comprobarUsuario(String email,String password) {
 		// TODO Auto-generated method stub
-		
+		PersistenceManager pm = pmf.getPersistenceManager();
 		pm.getFetchPlan().setMaxFetchDepth(3);
 		
 		Transaction tx = pm.currentTransaction();
@@ -85,16 +73,19 @@ public class Server extends UnicastRemoteObject implements IServer {
 	    
 		try {
 			
+			try {
+				usuario = pm.getObjectById(Usuario.class, email);
+				if(usuario.getContrasenya().equals(password)) {
+					return usuario;
+				}else {
+					usuario=null;
+				}
+			} catch (javax.jdo.JDOObjectNotFoundException jonfe) {
+				System.out.println("Exception launched: " + jonfe.getMessage());
+			}
 	    	tx.begin();
 	    	
-	    	@SuppressWarnings("unchecked")
-			Query<Usuario> query = pm.newQuery("SELECT FROM " +Usuario.class.getName()+" WHERE email == '"+email+"' AND password= '" +password+"'");
-	    	
-	    	query.setUnique(true);
-	    	usuario = (Usuario)query.execute();	 
-			
-		
-	    	query.close();	    
+	    		    
  	    	tx.commit();
    	    
 	     } catch (Exception ex) {

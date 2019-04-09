@@ -4,6 +4,7 @@ package es.deusto.client;
 import java.rmi.RemoteException;
 
 import es.deusto.server.IServer;
+import es.deusto.server.jdo.Usuario;
 
 public class Client {
 	static IServer server;
@@ -37,17 +38,21 @@ public class Client {
 		}
 	}
 	
-	public void iniciarSesion(String email, String password) {
+	public Usuario iniciarSesion(String email, String password) {
+		Usuario user=null;
 		try {
-			server.comprobarUsuario(email, password);
+			user=server.comprobarUsuario(email, password);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		return user;
 	}
 	
 	public void registrarUsuario(String email, String password) {
 		try {
+			
 			server.registrarUsuario(email, password, false);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
