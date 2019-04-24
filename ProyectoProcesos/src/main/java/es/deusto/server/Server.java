@@ -228,7 +228,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	    return listaCarreras;
 	}
 	
-	public void borrarCarrera (Carrera c) throws RemoteException{
+	public void borrarCarrera (String cod) throws RemoteException{
 		
 		PersistenceManager pm = pmf.getPersistenceManager();
 		pm.getFetchPlan().setMaxFetchDepth(3);
@@ -237,10 +237,10 @@ public class Server extends UnicastRemoteObject implements IServer {
 		
 		tx.begin();
 
-		Query<Carrera> query =  pm.newQuery(Carrera.class, "cod == " + c.getCod());
+		
+		Query<Carrera> query =  pm.newQuery(Carrera.class, "cod == \" "+ cod +" \"");
 
-		@SuppressWarnings("unchecked")
-		Collection<Carrera> result =  (Collection<Carrera>) query.execute();
+		Collection result = (Collection) query.execute();
 
 		Carrera carrera = (Carrera) result.iterator().next();
 

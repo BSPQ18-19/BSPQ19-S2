@@ -9,11 +9,14 @@ import javax.swing.border.EmptyBorder;
 import es.deusto.server.Server;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.awt.event.ActionEvent;
 
 public class BorrarCarrera extends JFrame {
@@ -48,7 +51,13 @@ public class BorrarCarrera extends JFrame {
 		JButton btnBorrar = new JButton("Borrar");
 		btnBorrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				try {
+					Client.server.borrarCarrera(textField.getText());
+					JOptionPane.showConfirmDialog(null, "Carrera borrada correctamente");
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnBorrar.setBounds(48, 209, 117, 29);

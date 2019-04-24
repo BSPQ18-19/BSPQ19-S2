@@ -15,6 +15,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class VentanaVer extends JFrame {
@@ -32,6 +33,13 @@ public class VentanaVer extends JFrame {
 public VentanaVer(ArrayList<Carrera> ListaCarreras,Usuario u ) {
 		
 		this.ListaCarreras = ListaCarreras;
+		
+		try {
+			ListaCarreras = Client.server.listaCarreras();
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{ 615,15};

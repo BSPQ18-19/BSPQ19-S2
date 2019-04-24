@@ -94,9 +94,9 @@ public class Client {
 		return listaCarreras();
 	}
 	
-	public void borrarCarrera (Carrera c) {
+	public void borrarCarrera (String cod) {
 		try {
-			server.borrarCarrera(c);
+			server.borrarCarrera(cod);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
