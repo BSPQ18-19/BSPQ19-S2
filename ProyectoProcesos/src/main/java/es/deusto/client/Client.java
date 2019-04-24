@@ -59,4 +59,15 @@ public class Client {
 			e.printStackTrace();
 		}
 	}
+	
+	public String sacarContra(String email) {
+		try {
+			
+			return server.sacarContra(email);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
 }

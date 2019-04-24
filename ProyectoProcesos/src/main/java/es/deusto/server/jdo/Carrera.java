@@ -13,22 +13,18 @@ public class Carrera implements Serializable{
 	private String cod;
 	private String nombreC;
 	private Date fecha;
-	private String descripcion;
 	private String lugar;
-	private double duracion;
 	private double precio;
 	private double premio;
 	private static final long serialVersionUID = 1L;
 	
-	public Carrera(String cod, String nombreC, Date fecha, String descripcion, String lugar, double duracion, double precio,
+	public Carrera(String cod, String nombreC, Date fecha,  String lugar,  double precio,
 			double premio) {
 		super();
 		this.cod = cod;
 		this.nombreC = nombreC;
 		this.fecha = fecha;
-		this.descripcion = descripcion;
 		this.lugar = lugar;
-		this.duracion = duracion;
 		this.precio = precio;
 		this.premio = premio;
 	}
@@ -57,13 +53,7 @@ public class Carrera implements Serializable{
 		this.fecha = fecha;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+	
 
 	public String getLugar() {
 		return lugar;
@@ -73,13 +63,7 @@ public class Carrera implements Serializable{
 		this.lugar = lugar;
 	}
 
-	public double getDuracion() {
-		return duracion;
-	}
-
-	public void setDuracion(double duracion) {
-		this.duracion = duracion;
-	}
+	
 
 	public double getPrecio() {
 		return precio;
