@@ -15,4 +15,6 @@ public interface IServer extends Remote {
 	public String sacarContra(String usuario) throws RemoteException;
 	public void crearCarrear(String cod, String nombreC, Date fecha, String lugar, double precio, double premio)  throws RemoteException;
 	public ArrayList<Carrera> listaCarreras () throws RemoteException;
+	public void borrarCarrera (Carrera c) throws RemoteException;
+	
 }

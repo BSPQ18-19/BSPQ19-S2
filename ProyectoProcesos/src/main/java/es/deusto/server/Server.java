@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
@@ -12,6 +13,7 @@ import javax.jdo.Query;
 import javax.jdo.JDOHelper;
 import javax.jdo.Transaction;
 import javax.swing.JOptionPane;
+
 
 import es.deusto.server.jdo.Carrera;
 import es.deusto.server.jdo.Usuario;
@@ -226,6 +228,28 @@ public class Server extends UnicastRemoteObject implements IServer {
 	    return listaCarreras;
 	}
 	
-	
+	public void borrarCarrera (Carrera c) throws RemoteException{
+		
+		PersistenceManager pm = pmf.getPersistenceManager();
+		pm.getFetchPlan().setMaxFetchDepth(3);
+		
+		Transaction tx = pm.currentTransaction();
+		
+		tx.begin();
+
+		Query<Carrera> query =  pm.newQuery(Carrera.class, "cod == " + c.getCod());
+
+		@SuppressWarnings("unchecked")
+		Collection<Carrera> result =  (Collection<Carrera>) query.execute();
+
+		Carrera carrera = (Carrera) result.iterator().next();
+
+		query.close(result);
+
+		pm.deletePersistent(carrera);
+		   
+		   tx.commit();
+		
+	}
 	
 }
