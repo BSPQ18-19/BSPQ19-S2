@@ -2,8 +2,11 @@ package es.deusto.client;
 
 
 import java.rmi.RemoteException;
+import java.sql.Date;
+import java.util.ArrayList;
 
 import es.deusto.server.IServer;
+import es.deusto.server.jdo.Carrera;
 import es.deusto.server.jdo.Usuario;
 
 public class Client {
@@ -70,4 +73,34 @@ public class Client {
 			return null;
 		}
 	}
+
+	public void crearCarrear(String cod, String nombreC, String fecha, String lugar, double precio, double premio) {
+		try {	
+			server.crearCarrear(cod, nombreC, fecha, lugar, precio, premio);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+
+	public ArrayList<Carrera> listaCarreras (){
+		try {	
+			server.listaCarreras();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return listaCarreras();
+	}
+	
+	public void borrarCarrera (Carrera c) {
+		try {
+			server.borrarCarrera(c);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }

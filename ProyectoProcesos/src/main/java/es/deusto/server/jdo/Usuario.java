@@ -36,6 +36,16 @@ public class Usuario implements Serializable{
 	public void setContrasenya(String contrasenya) {
 		this.contrasenya = contrasenya;
 	}
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+	
+	
 	
 	
 

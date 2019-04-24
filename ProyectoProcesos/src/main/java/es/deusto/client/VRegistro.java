@@ -43,6 +43,7 @@ public class VRegistro extends JFrame {
 	private static Logger log;
 	private Client client;
 	public static String nomfich;
+	private Usuario u;
 
 	/**
 	 * Create the frame.
@@ -144,7 +145,24 @@ public class VRegistro extends JFrame {
 				String contrasenya = String.valueOf(passwordField.getPassword());
 				Usuario user = client.iniciarSesion(usuario, contrasenya);
 				if (user != null) {
-					JOptionPane.showMessageDialog(VRegistro.this, "Inicio Sesion Correcto");
+					//JOptionPane.showMessageDialog(VRegistro.this, "Inicio Sesion Correcto");
+
+					//Esto deberia de ir pero na
+					
+//					if (u.isAdmin() == true) {
+//						VentanaAdmin b = new VentanaAdmin();
+//						b.setVisible(true);
+//						VRegistro.this.setVisible(false);
+//					} else {
+//					VentanaMenu a = new VentanaMenu();
+//					a.setVisible(true);
+//					VRegistro.this.setVisible(false);
+//					}
+					
+					VentanaAdmin b = new VentanaAdmin();
+					b.setVisible(true);
+					VRegistro.this.setVisible(false);
+					
 				} else {
 					JOptionPane.showMessageDialog(VRegistro.this, "Inicio Sesion Inorrecto");
 				}

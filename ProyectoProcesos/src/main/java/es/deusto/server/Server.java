@@ -166,7 +166,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		return user.getContrasenya();
 	}
 	
-	public void crearCarrear(String cod, String nombreC, Date fecha, String lugar, double precio, double premio)  throws RemoteException{
+	public void crearCarrear(String cod, String nombreC, String fecha, String lugar, double precio, double premio)  throws RemoteException{
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 		pm.getFetchPlan().setMaxFetchDepth(3);

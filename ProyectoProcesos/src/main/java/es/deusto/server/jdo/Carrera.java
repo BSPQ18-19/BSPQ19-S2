@@ -12,13 +12,13 @@ public class Carrera implements Serializable{
 	@PrimaryKey
 	private String cod;
 	private String nombreC;
-	private Date fecha;
+	private String fecha;
 	private String lugar;
 	private double precio;
 	private double premio;
 	private static final long serialVersionUID = 1L;
 	
-	public Carrera(String cod, String nombreC, Date fecha,  String lugar,  double precio,
+	public Carrera(String cod, String nombreC, String fecha,  String lugar,  double precio,
 			double premio) {
 		super();
 		this.cod = cod;
@@ -45,11 +45,11 @@ public class Carrera implements Serializable{
 		this.nombreC = nombreC;
 	}
 
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 
