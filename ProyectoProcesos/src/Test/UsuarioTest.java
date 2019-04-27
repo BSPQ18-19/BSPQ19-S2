@@ -2,11 +2,21 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Rule;
+import org.databene.contiperf.Required;
+import org.databene.contiperf.PerfTest;
+import org.databene.contiperf.junit.ContiPerfRule;
+import org.databene.contiperf.report.EmptyReportModule;
 
+@PerfTest(invocations = 5)
+@Required(max = 1200, average = 250)
 public class UsuarioTest {
 
 	private Usuario u;
 	
+	// If you use the EmptyReportModule, the report is not generated
+	//@Rule public ContiPerfRule rule = new ContiPerfRule(new EmptyReportModule());
+	@Rule public ContiPerfRule rule = new ContiPerfRule();
 	
 	@Before
 	public void setUp() {
@@ -15,6 +25,8 @@ public class UsuarioTest {
 	}
 		
 	@Test
+    @PerfTest(invocations = 1000, threads = 20)
+    @Required(max = 120, average = 30)
 	public void TestGetEmail() {
 		
 		assertEquals("victormartin@opendeusto.es", u.getEmail());
