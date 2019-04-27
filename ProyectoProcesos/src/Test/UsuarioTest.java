@@ -8,6 +8,9 @@ import org.databene.contiperf.PerfTest;
 import org.databene.contiperf.junit.ContiPerfRule;
 import org.databene.contiperf.report.EmptyReportModule;
 
+@RunWith(ContiPerfSuiteRunner.class)
+@SuiteClasses(MyApplicationTest.class)
+
 @PerfTest(invocations = 5)
 @Required(max = 1200, average = 250)
 public class UsuarioTest {
