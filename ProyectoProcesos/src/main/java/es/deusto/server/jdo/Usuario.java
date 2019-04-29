@@ -14,12 +14,16 @@ public class Usuario implements Serializable{
 	private boolean admin;
 	private static final long serialVersionUID = 1L;
 	
+	//Constructores
+	
 	public Usuario(String email, String contrasenya, boolean admin) {
 		super();
 		this.email = email;
 		this.contrasenya = contrasenya;
 		this.admin = false;
 	}
+	
+	//getters y setters Email
 
 	public String getEmail() {
 		return email;
@@ -28,6 +32,8 @@ public class Usuario implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	//getters y setters Contrasenya
 
 	public String getContrasenya() {
 		return contrasenya;
@@ -36,6 +42,8 @@ public class Usuario implements Serializable{
 	public void setContrasenya(String contrasenya) {
 		this.contrasenya = contrasenya;
 	}
+	
+	//getters y setters Admin
 
 	public boolean isAdmin() {
 		return admin;
@@ -44,6 +52,19 @@ public class Usuario implements Serializable{
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

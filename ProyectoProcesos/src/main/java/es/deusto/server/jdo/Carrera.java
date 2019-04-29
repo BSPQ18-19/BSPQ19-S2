@@ -18,6 +18,8 @@ public class Carrera implements Serializable{
 	private double premio;
 	private static final long serialVersionUID = 1L;
 	
+	//Constructores
+	
 	public Carrera(String cod, String nombreC, String fecha,  String lugar,  double precio,
 			double premio) {
 		super();
@@ -29,6 +31,8 @@ public class Carrera implements Serializable{
 		this.premio = premio;
 	}
 	
+	//getters y setters cod
+	
 
 	public String getCod() {
 		return cod;
@@ -39,6 +43,7 @@ public class Carrera implements Serializable{
 		this.cod = cod;
 	}
 	
+	//getters y setters Nombre
 
 	public String getNombreC() {
 		return nombreC;
@@ -48,6 +53,8 @@ public class Carrera implements Serializable{
 	public void setNombreC(String nombreC) {
 		this.nombreC = nombreC;
 	}
+	
+	//getters y setters Fecha
 
 	
 	public String getFecha() {
@@ -58,6 +65,8 @@ public class Carrera implements Serializable{
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
+	
+	//getters y setters Lugar
 
 	
 
@@ -70,6 +79,9 @@ public class Carrera implements Serializable{
 	public void setLugar(String lugar) {
 		this.lugar = lugar;
 	}
+	
+	
+	//getters y setters precio
 
 
 	public double getPrecio() {
@@ -80,6 +92,8 @@ public class Carrera implements Serializable{
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
+	
+	//getters y setters premio
 
 	
 	public double getPremio() {
