@@ -8,8 +8,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import es.deusto.server.jdo.Usuario;
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import java.awt.event.ActionEvent;
 
 public class VentanaMenu extends JFrame {
@@ -17,7 +21,7 @@ public class VentanaMenu extends JFrame {
 	private JPanel contentPane;
 
 	
-	public VentanaMenu() {
+	public VentanaMenu(Client client, Usuario user) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -38,9 +42,13 @@ public class VentanaMenu extends JFrame {
 		
 		btnVerCarrera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaVer vv = new VentanaVer();
+				
+				
+				VentanaVer vv;
+				vv = new VentanaVer(client,user);
 				vv.setVisible(true);
 				VentanaMenu.this.setVisible(false);
+			
 			}
 		});
 		
@@ -54,4 +62,6 @@ public class VentanaMenu extends JFrame {
 		btnVolver.setBounds(307, 217, 117, 29);
 		contentPane.add(btnVolver);
 	}
+	
+	
 }

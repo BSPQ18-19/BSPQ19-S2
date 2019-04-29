@@ -6,10 +6,12 @@ import java.rmi.server.UnicastRemoteObject;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.Query;
+import javax.jdo.Extent;
 import javax.jdo.JDOHelper;
 import javax.jdo.Transaction;
 import javax.swing.JOptionPane;
@@ -196,22 +198,28 @@ public class Server extends UnicastRemoteObject implements IServer {
 	}
 	
 	public ArrayList<Carrera> listaCarreras () throws RemoteException{
+		
+		System.out.println ("Sacando carreras de la BD");
 		PersistenceManager pm = pmf.getPersistenceManager();
 		pm.getFetchPlan().setMaxFetchDepth(3);
 		
 		Transaction tx = pm.currentTransaction();
 
-		ArrayList<Carrera> listaCarreras = null;
+		ArrayList<Carrera> listaCarreras = new ArrayList<>();
 	    
 		try {
-			System.out.println ("Sacando carreras de la BD");
+			
 			
 	    	tx.begin();
 	    	
-	    	Query<Carrera> q = pm.newNamedQuery(Carrera.class,"SoldOut");
+	    	Extent<Carrera> ext=pm.getExtent(Carrera.class);
 
-	    	listaCarreras = (ArrayList<Carrera>) q.executeList();
-
+	    	Iterator<Carrera> iter= ext.iterator();
+	    	
+	    	while(iter.hasNext()) {
+	    		Object obj=iter.next();
+	    		listaCarreras.add((Carrera) obj);
+	    	}
 	    	
  	    	tx.commit();
    	    
@@ -238,16 +246,12 @@ public class Server extends UnicastRemoteObject implements IServer {
 		tx.begin();
 
 		
-		Query<Carrera> query =  pm.newQuery(Carrera.class, "cod == \" "+ cod +" \"");
+		@SuppressWarnings("unchecked")
+		Query<Carrera> query =  pm.newQuery("SELECT FROM "+Carrera.class.getName()+" WHERE cod == '"+ cod +"' ");
 
-		Collection result = (Collection) query.execute();
-
-		Carrera carrera = (Carrera) result.iterator().next();
-
-		query.close(result);
-
-		pm.deletePersistent(carrera);
-		   
+		long numberdeleted=query.deletePersistentAll();	
+		
+		System.out.println(numberdeleted +"users deleted");
 		   tx.commit();
 		
 	}

@@ -105,8 +105,24 @@ public class VCrearUsuario extends JFrame {
 				String contrasenya = String.valueOf(passwordField.getPassword());
 				client.registrarUsuario(usuario, contrasenya);
 				VCrearUsuario.this.setVisible(false);
-				
+				Usuario user=client.iniciarSesion(usuario, contrasenya);
+				if (user != null) {
+					System.out.println(user.isAdmin());
+
+					if (user.isAdmin()) {
+						VentanaAdmin b = new VentanaAdmin(client, user);
+						b.setVisible(true);
+					} else {
+						VentanaMenu a = new VentanaMenu(client, user);
+						a.setVisible(true);
+					}
+
+					VCrearUsuario.this.setVisible(false);
+
+				} else {
+					JOptionPane.showMessageDialog(VCrearUsuario.this, "Inicio Sesion Inorrecto");
 				}
+			}
 		});
 
 	}

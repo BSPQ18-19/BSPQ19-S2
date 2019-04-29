@@ -85,13 +85,15 @@ public class Client {
 	
 
 	public ArrayList<Carrera> listaCarreras (){
+		
 		try {	
-			server.listaCarreras();
+			return server.listaCarreras();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
-		return listaCarreras();
+	
 	}
 	
 	public void borrarCarrera (String cod) {

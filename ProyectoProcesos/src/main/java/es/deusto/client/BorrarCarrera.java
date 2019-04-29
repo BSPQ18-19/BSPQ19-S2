@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import es.deusto.server.Server;
+import es.deusto.server.jdo.Usuario;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -25,7 +26,7 @@ public class BorrarCarrera extends JFrame {
 	private JTextField textField;
 
 	
-	public BorrarCarrera() {
+	public BorrarCarrera(Client client, Usuario user) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -66,7 +67,7 @@ public class BorrarCarrera extends JFrame {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaAdmin a = new VentanaAdmin();
+				VentanaAdmin a = new VentanaAdmin(client, user);
 				a.setVisible(true);
 				BorrarCarrera.this.setVisible(false);
 			}

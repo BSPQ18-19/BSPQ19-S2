@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import es.deusto.server.jdo.Usuario;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
@@ -17,7 +20,7 @@ public class VentanaAdmin extends JFrame {
 	private JPanel contentPane;
 
 	
-	public VentanaAdmin() {
+	public VentanaAdmin(Client client, Usuario user) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -40,7 +43,7 @@ public class VentanaAdmin extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				VentanaVer vv = new VentanaVer();
+				VentanaVer vv = new VentanaVer(client, user);
 				vv.setVisible(true);
 				VentanaAdmin.this.setVisible(false);
 			}
@@ -55,7 +58,7 @@ public class VentanaAdmin extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				CrearCarrera cc = new CrearCarrera();
+				CrearCarrera cc = new CrearCarrera(client, user);
 				cc.setVisible(true);
 				VentanaAdmin.this.setVisible(false);
 			}
@@ -70,7 +73,7 @@ public class VentanaAdmin extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				BorrarCarrera bc = new BorrarCarrera();
+				BorrarCarrera bc = new BorrarCarrera(client , user);
 				bc.setVisible(true);
 				VentanaAdmin.this.setVisible(false);
 			}

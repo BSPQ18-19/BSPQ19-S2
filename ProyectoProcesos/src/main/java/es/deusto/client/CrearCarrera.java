@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import es.deusto.server.jdo.Usuario;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -31,7 +34,7 @@ public class CrearCarrera extends JFrame {
 	private Date fecha; 
 
 	
-	public CrearCarrera() {
+	public CrearCarrera(Client client,Usuario user) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -102,7 +105,7 @@ public class CrearCarrera extends JFrame {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaMenu m = new VentanaMenu();
+				VentanaMenu m = new VentanaMenu(client , user);
 				m.setVisible(true);
 			}
 		});

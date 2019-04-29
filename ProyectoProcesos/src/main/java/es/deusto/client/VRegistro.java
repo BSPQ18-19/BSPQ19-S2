@@ -119,8 +119,8 @@ public class VRegistro extends JFrame {
 
 				// String pass = BD.olvidarContra(contra);
 
-					enviarCorreo(mail);
-				
+				enviarCorreo(mail);
+
 			}
 
 		});
@@ -145,24 +145,18 @@ public class VRegistro extends JFrame {
 				String contrasenya = String.valueOf(passwordField.getPassword());
 				Usuario user = client.iniciarSesion(usuario, contrasenya);
 				if (user != null) {
-					//JOptionPane.showMessageDialog(VRegistro.this, "Inicio Sesion Correcto");
+					System.out.println(user.isAdmin());
 
-					//Esto deberia de ir pero na
-					
-//					if (u.isAdmin() == true) {
-//						VentanaAdmin b = new VentanaAdmin();
-//						b.setVisible(true);
-//						VRegistro.this.setVisible(false);
-//					} else {
-//					VentanaMenu a = new VentanaMenu();
-//					a.setVisible(true);
-//					VRegistro.this.setVisible(false);
-//					}
-					
-					VentanaAdmin b = new VentanaAdmin();
-					b.setVisible(true);
+					if (user.isAdmin()) {
+						VentanaAdmin b = new VentanaAdmin(client, user);
+						b.setVisible(true);
+					} else {
+						VentanaMenu a = new VentanaMenu(client, user);
+						a.setVisible(true);
+					}
+
 					VRegistro.this.setVisible(false);
-					
+
 				} else {
 					JOptionPane.showMessageDialog(VRegistro.this, "Inicio Sesion Inorrecto");
 				}
@@ -215,8 +209,7 @@ public class VRegistro extends JFrame {
 //// *** END CHANGE
 //
 //    }
-	
-	
+
 	private void enviarCorreo(String mail) {
 
 		// El correo gmail de envÌo
@@ -290,9 +283,7 @@ public class VRegistro extends JFrame {
 			}
 
 		}
-		
-		
-		
+
 	}
 
 }

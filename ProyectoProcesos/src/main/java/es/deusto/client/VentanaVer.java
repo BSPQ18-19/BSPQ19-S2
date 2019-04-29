@@ -19,27 +19,20 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class VentanaVer extends JFrame {
-	public VentanaVer() {
-	}
+
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private Client c;
+	private ArrayList<Carrera> ListaCarreras=new ArrayList<>();
 	
-	private ArrayList<Carrera> ListaCarreras;
-	
-public VentanaVer(ArrayList<Carrera> ListaCarreras,Usuario u ) {
-		
-		this.ListaCarreras = ListaCarreras;
-		
-		try {
-			ListaCarreras = Client.server.listaCarreras();
-		} catch (RemoteException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+public VentanaVer(Client client, Usuario u ) {
+		c=client;
+		ListaCarreras = c.listaCarreras();
+		System.out.println("adrian es puto desgraciado");
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{ 615,15};
@@ -136,14 +129,17 @@ public VentanaVer(ArrayList<Carrera> ListaCarreras,Usuario u ) {
 					
 					
 					if (u.isAdmin() == true) {
-						VentanaAdmin b = new VentanaAdmin();
+						VentanaAdmin b = new VentanaAdmin(client, u);
 						b.setVisible(true);
 					}
 					else {
-					VentanaMenu a = new VentanaMenu();
+					VentanaMenu a = new VentanaMenu(client, u);
 					a.setVisible(true);
 					}
+					
+					VentanaVer.this.setVisible(false);
 				}
+				
 			});
 			btnVolver.setBounds(307, 217, 117, 29);
 			carrera.add(btnVolver);
