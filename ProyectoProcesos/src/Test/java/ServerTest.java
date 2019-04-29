@@ -1,3 +1,5 @@
+package es.deusto.testing;
+
 
 
 import static org.junit.Assert.assertEquals;
