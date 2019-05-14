@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 
 
 import es.deusto.server.jdo.Carrera;
+import es.deusto.server.jdo.Patrocinadores;
 import es.deusto.server.jdo.Usuario;
 
 public class Server extends UnicastRemoteObject implements IServer {
@@ -219,6 +220,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	    	while(iter.hasNext()) {
 	    		Object obj=iter.next();
 	    		listaCarreras.add((Carrera) obj);
+	    		System.out.println("carrera");
 	    	}
 	    	
  	    	tx.commit();
@@ -255,5 +257,96 @@ public class Server extends UnicastRemoteObject implements IServer {
 		   tx.commit();
 		
 	}
+
+	
+	@Override
+	public void incribirse(String cod, String email)throws RemoteException {
+		// TODO Auto-generated method stub
+		
+		PersistenceManager pm = pmf.getPersistenceManager();
+	
+		
+		Transaction tx = pm.currentTransaction();
+		
+		tx.begin(); 
+		
+		
+		@SuppressWarnings("unchecked")
+		Query<Carrera> q = pm.newQuery("INSERT INTO carrera_listausuarios (COD_OID,EMAIL_EID,IDX)VALUES ('"+ cod+ "' , '" + email+ "' , 0)"     );
+		q.execute();
+		
+		System.out.println( "Participante inscrito ");
+		   tx.commit();
+		
+	}
+
+	@Override
+	public void borrarParticipante(String cod, String email)throws RemoteException {
+		// TODO Auto-generated method stub
+		PersistenceManager pm = pmf.getPersistenceManager();
+		pm.getFetchPlan().setMaxFetchDepth(3);
+		
+		Transaction tx = pm.currentTransaction();
+		
+		tx.begin();
+
+		
+		@SuppressWarnings("unchecked")
+		Query<Carrera> query =  pm.newQuery("SELECT FROM carrera_listausuarios WHERE COD_OID == '"+ cod +"' AND EMAIL_EID == '"+ email +"' ");
+
+		long numberdeleted=query.deletePersistentAll();	
+		
+		System.out.println(numberdeleted +"Participante borrado");
+		   tx.commit();
+	}
+
+	@Override
+	public void anyadirPatrocinador(String cod, String nombre, double contribucion)throws RemoteException {
+		// TODO Auto-generated method stub
+		PersistenceManager pm = pmf.getPersistenceManager();
+		
+		
+		Transaction tx = pm.currentTransaction();
+		
+		tx.begin();
+		
+	
+		Patrocinadores p = new Patrocinadores (Patrocinadores.codigos,nombre,contribucion);
+		
+		pm.makePersistent(p);
+		
+		@SuppressWarnings("unchecked")
+		Query <Carrera> q  = pm.newQuery("UPDATE  carrera_listausuarios SET PATROCINADOR_CODPATROCINADOR_OID= '"+ p.getCodPatrocinador()+ "' WHERE COD == '" + cod+ "'"     );
+		q.execute();
+		
+		System.out.println( "Patrocinador  añadido");
+		   tx.commit();
+	}
+
+	@Override
+	public void borrarPatrocinador(String cod, String nombre)throws RemoteException {
+		// TODO Auto-generated method stub
+		PersistenceManager pm = pmf.getPersistenceManager();
+		pm.getFetchPlan().setMaxFetchDepth(3);
+		
+		Transaction tx = pm.currentTransaction();
+		
+		tx.begin();
+
+		
+		@SuppressWarnings("unchecked")
+		Query<Patrocinadores> query1 =  pm.newQuery("SELECT FROM " +Patrocinadores.class.getName()+" WHERE NOMBRE == '" + nombre + "'");
+		query1.setUnique(true);
+		Patrocinadores p = (Patrocinadores) query1.execute();
+		@SuppressWarnings("unchecked")
+		Query<Carrera> query =  pm.newQuery("SELECT FROM " +Carrera.class.getName()+" WHERE PATROCINADOR_CODPATROCINADOR_OID == '" + p.getCodPatrocinador() + "'");
+
+		long numberdeleted=query.deletePersistentAll();	
+		
+		System.out.println(numberdeleted +"Participante borrado");
+		   tx.commit();
+	}
+
+
 	
 }

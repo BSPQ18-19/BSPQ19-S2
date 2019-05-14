@@ -1,12 +1,14 @@
 package es.deusto.server.jdo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
-
+import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
- @PersistenceCapable(detachable = "true")
+ @PersistenceCapable
 public class Carrera implements Serializable{
 	
 	@PrimaryKey
@@ -16,7 +18,14 @@ public class Carrera implements Serializable{
 	private String lugar;
 	private double precio;
 	private double premio;
-	private static final long serialVersionUID = 1L;
+	@Join
+	@Persistent(defaultFetchGroup="true")
+	private ArrayList <Usuario> listaUsuarios;
+	@Persistent(defaultFetchGroup="true")
+	private Patrocinadores patrocinador;
+	
+	
+	//private static final long serialVersionUID = 1L;
 	
 	//Constructores
 	
