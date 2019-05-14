@@ -16,5 +16,9 @@ public interface IServer extends Remote {
 	public void crearCarrear(String cod, String nombreC, String fecha, String lugar, double precio, double premio)  throws RemoteException;
 	public ArrayList<Carrera> listaCarreras () throws RemoteException;
 	public void borrarCarrera (String cod) throws RemoteException;
+	public void incribirse(String cod, String email)throws RemoteException;
+	public void borrarParticipante(String cod, String email)throws RemoteException;
+	public void anyadirPatrocinador(String cod, String nombre, double contribucion) throws RemoteException;
+	public void borrarPatrocinador(String cod, String nombre)throws RemoteException;
 	
 }

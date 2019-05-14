@@ -22,7 +22,7 @@ public class VentanaAdmin extends JFrame {
 	
 	public VentanaAdmin(Client client, Usuario user) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 400);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -36,7 +36,7 @@ public class VentanaAdmin extends JFrame {
 		
 		JButton btnVerCarrera = new JButton("Ver Carreras");
 		btnVerCarrera.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnVerCarrera.setBounds(121, 59, 176, 29);
+		btnVerCarrera.setBounds(121, 60, 176, 45);
 		contentPane.add(btnVerCarrera);
 		btnVerCarrera.addActionListener(new ActionListener() {
 			
@@ -51,7 +51,7 @@ public class VentanaAdmin extends JFrame {
 		
 		JButton btnCrearCarrera = new JButton("Crear Carrera ");
 		btnCrearCarrera.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnCrearCarrera.setBounds(121, 112, 176, 29);
+		btnCrearCarrera.setBounds(121, 100, 176, 45);
 		contentPane.add(btnCrearCarrera);
 		btnCrearCarrera.addActionListener(new ActionListener() {
 			
@@ -66,7 +66,7 @@ public class VentanaAdmin extends JFrame {
 		
 		JButton btnBorrarCarrera = new JButton("Borrar  Carrera ");
 		btnBorrarCarrera.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
-		btnBorrarCarrera.setBounds(121, 169, 176, 29);
+		btnBorrarCarrera.setBounds(121, 140, 176, 45);
 		contentPane.add(btnBorrarCarrera);
 		btnBorrarCarrera.addActionListener(new ActionListener() {
 			
@@ -79,6 +79,37 @@ public class VentanaAdmin extends JFrame {
 			}
 		});
 		
+
+		JButton btnGestionarParticipantes = new JButton("Borrar participantes");
+		btnGestionarParticipantes.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnGestionarParticipantes.setBounds(121, 180, 176, 45);
+		contentPane.add(btnGestionarParticipantes);
+		btnGestionarParticipantes.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				BorrarParticipante bp = new BorrarParticipante(client , user);
+				bp.setVisible(true);
+				VentanaAdmin.this.setVisible(false);
+			}
+		});
+		
+		JButton btnGestionarPatrocinador = new JButton("Gestionar patrocinadores");
+		btnGestionarPatrocinador.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnGestionarPatrocinador.setBounds(121, 220, 176, 45);
+		contentPane.add(btnGestionarPatrocinador);
+		btnGestionarPatrocinador.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				VentanaPatrocinador vp = new VentanaPatrocinador(client , user);
+				vp.setVisible(true);
+				VentanaAdmin.this.setVisible(false);
+			}
+		});
+		
 		JButton btnVolver = new JButton("Salir");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -86,7 +117,7 @@ public class VentanaAdmin extends JFrame {
 				System.exit(0);
 			}
 		});
-		btnVolver.setBounds(18, 232, 117, 29);
+		btnVolver.setBounds(18, 300, 117, 29);
 		contentPane.add(btnVolver);
 	}
 }

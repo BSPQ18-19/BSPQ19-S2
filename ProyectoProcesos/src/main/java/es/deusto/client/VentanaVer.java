@@ -32,7 +32,6 @@ public class VentanaVer extends JFrame {
 public VentanaVer(Client client, Usuario u ) {
 		c=client;
 		ListaCarreras = c.listaCarreras();
-		System.out.println("adrian es puto desgraciado");
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{ 615,15};

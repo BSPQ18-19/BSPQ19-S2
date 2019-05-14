@@ -5,14 +5,14 @@ import java.io.Serializable;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.PrimaryKey;
 
-@PersistenceCapable(detachable = "true")
+@PersistenceCapable
 public class Usuario implements Serializable{
 	
 	@PrimaryKey
 	private String email;
 	private String contrasenya;
 	private boolean admin;
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 	
 	//Constructores
 	

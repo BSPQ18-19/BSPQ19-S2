@@ -107,6 +107,9 @@ public class CrearCarrera extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				VentanaMenu m = new VentanaMenu(client , user);
 				m.setVisible(true);
+				CrearCarrera.this.setVisible(false);
+				
+				
 			}
 		});
 		btnVolver.setBounds(327, 243, 117, 29);
