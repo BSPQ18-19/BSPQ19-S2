@@ -1,5 +1,3 @@
-package es.deusto.testing;
-
 
 
 import static org.junit.Assert.assertNotNull;
@@ -13,7 +11,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import es.deusto.client.VRegistro
+import es.deusto.client.VRegistro;
+import es.deusto.server.IServer;
 import es.deusto.client.Client;
 
 
