@@ -105,4 +105,43 @@ public class Client {
 		}
 	}
 	
+	
+	public void Inscribirse  ( String cod, String email) {
+		try {
+			server.incribirse(cod, email);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void BorrarPartcipante   ( String cod, String email) {
+		try {
+			server.borrarParticipante(cod, email);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void anyadirPatrocinador  ( String cod, String nombre, double contribucion) {
+		try {
+			server.anyadirPatrocinador(cod, nombre, contribucion);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void BorrarPatrocinador   (String cod, String nombre) {
+		try {
+			server.borrarPatrocinador(cod, nombre);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
 }

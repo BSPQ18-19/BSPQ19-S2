@@ -39,7 +39,6 @@ public class VentanaMenu extends JFrame {
 		btnVerCarrera.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
 		btnVerCarrera.setBounds(121, 105, 176, 29);
 		contentPane.add(btnVerCarrera);
-		
 		btnVerCarrera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -51,6 +50,23 @@ public class VentanaMenu extends JFrame {
 			
 			}
 		});
+		
+		JButton btnIncribirse = new JButton("Incribirse");
+		btnIncribirse.setFont(new Font("Lucida Grande", Font.PLAIN, 15));
+		btnIncribirse.setBounds(121, 155, 176, 29);
+		contentPane.add(btnIncribirse);
+		btnIncribirse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+	
+				VentanaInscribirse vi;
+				vi = new VentanaInscribirse(client,user);
+				vi.setVisible(true);
+				VentanaMenu.this.setVisible(false);
+			
+			}
+		});
+		
+		
 		
 		JButton btnVolver = new JButton("Salir");
 		btnVolver.addActionListener(new ActionListener() {
