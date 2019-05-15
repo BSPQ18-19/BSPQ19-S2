@@ -41,12 +41,16 @@ public class UsuarioTestEstres {
 	}
 	
 	@Test
+    @PerfTest(invocations = 1000, threads = 20)
+    @Required(max = 120, average = 30)
 	public void TestGetContrasenya() {
 		
 		assertEquals("victor1234",u.getContrasenya());
 	}
 	
 	@Test
+    @PerfTest(invocations = 1000, threads = 20)
+    @Required(max = 120, average = 30)
 	public void TestSetEmail() {
 		
 		u.setEmail("victor@opendeusto.es");
@@ -54,6 +58,8 @@ public class UsuarioTestEstres {
 	}
 	
 	@Test
+    @PerfTest(invocations = 1000, threads = 20)
+    @Required(max = 120, average = 30)
 	public void TestSetContrasenya() {
 		
 		u.setContrasenya("martin21");
@@ -62,12 +68,16 @@ public class UsuarioTestEstres {
 	}
 	
 	@Test
+    @PerfTest(invocations = 1000, threads = 20)
+    @Required(max = 120, average = 30)
 	public void TestIsAdmin() {
 	
 		assertTrue(false,u.isAdmin());
 	}
 	
 	@Test
+    @PerfTest(invocations = 1000, threads = 20)
+    @Required(max = 120, average = 30)
 	public void TestSetIsAdmin() {
 		
 		u.setAdmin(false);
