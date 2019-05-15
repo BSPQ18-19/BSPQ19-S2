@@ -87,7 +87,7 @@ public class Client {
 	public ArrayList<Carrera> listaCarreras (){
 		
 		try {	
-			return server.listaCarreras();
+			return server.listaCarreras	();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -143,5 +143,12 @@ public class Client {
 		}
 	}
 	
-	
+	public void salir() {
+		try {
+			server.cerrar();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

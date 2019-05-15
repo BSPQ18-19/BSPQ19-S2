@@ -30,8 +30,8 @@ public class VentanaVer extends JFrame {
 	private ArrayList<Carrera> ListaCarreras=new ArrayList<>();
 	
 public VentanaVer(Client client, Usuario u ) {
-		c=client;
-		ListaCarreras = c.listaCarreras();
+		
+		ListaCarreras = client.listaCarreras();
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{ 615,15};
@@ -42,12 +42,12 @@ public VentanaVer(Client client, Usuario u ) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 850, 800);
 		
-		System.out.println(ListaCarreras.size());
+		System.out.println(ListaCarreras.get(0).getNombreC());
 		
 		int i=0;
-		for (Carrera v: ListaCarreras) {
+		for (Carrera c: ListaCarreras) {
 			
-			
+			System.out.println(c.getNombreC());
 			JPanel carrera = new JPanel();
 			GridBagLayout gbl_pFlight = new GridBagLayout();
 			gbl_pFlight.columnWidths = new int[]{96, 0, 198, 124, 205, 0};
@@ -63,7 +63,7 @@ public VentanaVer(Client client, Usuario u ) {
 			gbc_pFlights.gridx = 0;
 			gbc_pFlights.gridy = i;
 			
-			JLabel lblnm = new JLabel("Codigo" + v.getCod());
+			JLabel lblnm = new JLabel("Codigo: " + c.getCod());
 			lblnm.setBounds(12, 139, 78, 16);
 			GridBagConstraints gbc_codigo = new GridBagConstraints();
 			gbc_codigo.fill = GridBagConstraints.BOTH;
@@ -73,7 +73,7 @@ public VentanaVer(Client client, Usuario u ) {
 			carrera.add(lblnm, gbc_codigo);
 			
 			
-			JLabel lblnombre = new JLabel("Nombre" + v.getNombreC());
+			JLabel lblnombre = new JLabel("Nombre: " + c.getNombreC());
 			lblnombre.setBounds(12, 139, 78, 16);
 			GridBagConstraints gbc_lblnombre = new GridBagConstraints();
 			gbc_lblnombre.fill = GridBagConstraints.BOTH;
@@ -83,7 +83,7 @@ public VentanaVer(Client client, Usuario u ) {
 			carrera.add(lblnombre, gbc_lblnombre);
 			
 			
-			JLabel lblfecha = new JLabel("Fecha "+v.getFecha());
+			JLabel lblfecha = new JLabel("Fecha: "+c.getFecha());
 			lblfecha.setBounds(12, 52, 111, 33);
 			GridBagConstraints gbc_lblfecha = new GridBagConstraints();
 			gbc_lblfecha.fill = GridBagConstraints.BOTH;
@@ -93,7 +93,7 @@ public VentanaVer(Client client, Usuario u ) {
 			carrera.add(lblfecha, gbc_lblfecha);
 			
 			
-			JLabel lbllugar = new JLabel("Lugar" + v.getLugar());
+			JLabel lbllugar = new JLabel("Lugar: " + c.getLugar());
 			lbllugar.setBounds(12, 97, 133, 25);
 			GridBagConstraints gbc_lbllugar = new GridBagConstraints();
 			gbc_lbllugar.fill = GridBagConstraints.BOTH;
@@ -103,7 +103,7 @@ public VentanaVer(Client client, Usuario u ) {
 			carrera.add(lbllugar, gbc_lbllugar);
 			
 			
-			JLabel lblprecio = new JLabel("Precio" + v.getPrecio());
+			JLabel lblprecio = new JLabel("Precio: " + c.getPrecio());
 			lblprecio.setBounds(12, 139, 78, 16);
 			GridBagConstraints gbc_lprecio = new GridBagConstraints();
 			gbc_lprecio.fill = GridBagConstraints.BOTH;
@@ -113,7 +113,7 @@ public VentanaVer(Client client, Usuario u ) {
 			carrera.add(lblprecio, gbc_lprecio);
 			
 			
-			JLabel lblpremio = new JLabel("Premio" + v.getPremio());
+			JLabel lblpremio = new JLabel("Premio: " + c.getPremio());
 			lblprecio.setBounds(12, 100, 100, 28);
 			GridBagConstraints gbc_lblpremio = new GridBagConstraints();
 			gbc_lblpremio.fill = GridBagConstraints.BOTH;

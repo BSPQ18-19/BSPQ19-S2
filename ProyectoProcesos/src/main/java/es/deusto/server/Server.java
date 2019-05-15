@@ -26,17 +26,19 @@ public class Server extends UnicastRemoteObject implements IServer {
 	private static final long serialVersionUID = 1L;
 	private int cont = 0;
 	private PersistenceManagerFactory pmf=null;
+	PersistenceManager pm=null;
 
 	protected Server() throws RemoteException {
 		super();
 		pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+		pm=pmf.getPersistenceManager();
 		
 		
 	}
 	
 	public void registrarUsuario(String email, String password, boolean admin) {
 		
-		PersistenceManager pm = pmf.getPersistenceManager();
+		
 		pm.getFetchPlan().setMaxFetchDepth(3);
 		
 		Transaction tx = pm.currentTransaction();
@@ -68,7 +70,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	@Override
 	public Usuario comprobarUsuario(String email,String password) {
 		// TODO Auto-generated method stub
-		PersistenceManager pm = pmf.getPersistenceManager();
+
 		pm.getFetchPlan().setMaxFetchDepth(3);
 		
 		Transaction tx = pm.currentTransaction();
@@ -98,7 +100,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		   		tx.rollback();
 		 }
 				
-	   		pm.close();
+	   		
 	     }
 
 	    return usuario;
@@ -136,7 +138,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 	public String sacarContra(String usuario) throws RemoteException {
 		// TODO Auto-generated method stub
 		
-		PersistenceManager pm = pmf.getPersistenceManager();
+
 		pm.getFetchPlan().setMaxFetchDepth(3);
 		
 		Transaction tx = pm.currentTransaction();
@@ -162,7 +164,7 @@ public class Server extends UnicastRemoteObject implements IServer {
 		   		tx.rollback();
 		 }
 				
-	   		pm.close();
+	   		
 	     }
 		
 		
@@ -171,8 +173,6 @@ public class Server extends UnicastRemoteObject implements IServer {
 	
 	public void crearCarrear(String cod, String nombreC, String fecha, String lugar, double precio, double premio)  throws RemoteException{
 
-		PersistenceManager pm = pmf.getPersistenceManager();
-		pm.getFetchPlan().setMaxFetchDepth(3);
 		
 		Transaction tx = pm.currentTransaction();
 		
@@ -201,7 +201,6 @@ public class Server extends UnicastRemoteObject implements IServer {
 	public ArrayList<Carrera> listaCarreras () throws RemoteException{
 		
 		System.out.println ("Sacando carreras de la BD");
-		PersistenceManager pm = pmf.getPersistenceManager();
 		pm.getFetchPlan().setMaxFetchDepth(3);
 		
 		Transaction tx = pm.currentTransaction();
@@ -219,8 +218,9 @@ public class Server extends UnicastRemoteObject implements IServer {
 	    	
 	    	while(iter.hasNext()) {
 	    		Object obj=iter.next();
-	    		listaCarreras.add((Carrera) obj);
-	    		System.out.println("carrera");
+	    		Carrera c=(Carrera) obj;
+	    		listaCarreras.add(c);
+	    		System.out.println("carrera: "+c.getNombreC());
 	    	}
 	    	
  	    	tx.commit();
@@ -232,15 +232,14 @@ public class Server extends UnicastRemoteObject implements IServer {
 		   		tx.rollback();
 		 }
 				
-	   		pm.close();
+	   		
 	     }
-
+		System.out.println(listaCarreras.size());
 	    return listaCarreras;
 	}
 	
 	public void borrarCarrera (String cod) throws RemoteException{
 		
-		PersistenceManager pm = pmf.getPersistenceManager();
 		pm.getFetchPlan().setMaxFetchDepth(3);
 		
 		Transaction tx = pm.currentTransaction();
@@ -263,28 +262,41 @@ public class Server extends UnicastRemoteObject implements IServer {
 	public void incribirse(String cod, String email)throws RemoteException {
 		// TODO Auto-generated method stub
 		
-		PersistenceManager pm = pmf.getPersistenceManager();
 	
 		
 		Transaction tx = pm.currentTransaction();
+try {
+			
+			
+	    	tx.begin();
+	    	
+			System.out.println("Carrera: "+cod);
+			Carrera c=(Carrera) pm.getObjectById(cod);
+			System.out.println("Usuario: "+email);
+			Usuario u=(Usuario) pm.getObjectById(email);
+			
+			
+			c.anyadirParticipante(u);
+
+ 	    	tx.commit();
+   	    
+	     } catch (Exception ex) {
+		   	System.out.println("   $ Error retreiving an extent: " + ex.getMessage());
+	     } finally {
+		   	if (tx != null && tx.isActive()) {
+		   		tx.rollback();
+		 }
+				
+	     }
+
 		
-		tx.begin(); 
-		
-		
-		@SuppressWarnings("unchecked")
-		Query<Carrera> q = pm.newQuery("INSERT INTO carrera_listausuarios (COD_OID,EMAIL_EID,IDX)VALUES ('"+ cod+ "' , '" + email+ "' , 0)"     );
-		q.execute();
-		
-		System.out.println( "Participante inscrito ");
-		   tx.commit();
+
 		
 	}
 
 	@Override
 	public void borrarParticipante(String cod, String email)throws RemoteException {
 		// TODO Auto-generated method stub
-		PersistenceManager pm = pmf.getPersistenceManager();
-		pm.getFetchPlan().setMaxFetchDepth(3);
 		
 		Transaction tx = pm.currentTransaction();
 		
@@ -303,7 +315,6 @@ public class Server extends UnicastRemoteObject implements IServer {
 	@Override
 	public void anyadirPatrocinador(String cod, String nombre, double contribucion)throws RemoteException {
 		// TODO Auto-generated method stub
-		PersistenceManager pm = pmf.getPersistenceManager();
 		
 		
 		Transaction tx = pm.currentTransaction();
@@ -326,8 +337,6 @@ public class Server extends UnicastRemoteObject implements IServer {
 	@Override
 	public void borrarPatrocinador(String cod, String nombre)throws RemoteException {
 		// TODO Auto-generated method stub
-		PersistenceManager pm = pmf.getPersistenceManager();
-		pm.getFetchPlan().setMaxFetchDepth(3);
 		
 		Transaction tx = pm.currentTransaction();
 		
@@ -347,6 +356,9 @@ public class Server extends UnicastRemoteObject implements IServer {
 		   tx.commit();
 	}
 
-
+	public void cerrar() throws RemoteException{
+		pm.close();
+		pmf.close();
+	}
 	
 }

@@ -71,6 +71,7 @@ public class VentanaMenu extends JFrame {
 		JButton btnVolver = new JButton("Salir");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				client.salir();
 				System.exit(0);
 				
 			}

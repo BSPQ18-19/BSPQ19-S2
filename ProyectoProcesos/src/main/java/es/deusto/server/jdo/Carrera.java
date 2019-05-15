@@ -114,5 +114,11 @@ public class Carrera implements Serializable{
 		this.premio = premio;
 	}
 
+	public void anyadirParticipante(Usuario u) {
+		this.listaUsuarios.add(u);
+	}
 	
+	public void eliminarParticipante(Usuario u) {
+		this.listaUsuarios.remove(u);
+	}
 }
