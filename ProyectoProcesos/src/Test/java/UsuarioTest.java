@@ -5,6 +5,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite.SuiteClasses;
 
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import static org.mockito.Mockito.when;
+
 import es.deusto.server.jdo.Usuario;
 
 import org.junit.Rule;
@@ -18,6 +22,9 @@ import org.databene.contiperf.report.EmptyReportModule;
 
 //@PerfTest(invocations = 5)
 //@Required(max = 1200, average = 250)
+
+@RunWith(MockitoJUnitRunner.class)
+
 public class UsuarioTest {
 
 	private Usuario u;
