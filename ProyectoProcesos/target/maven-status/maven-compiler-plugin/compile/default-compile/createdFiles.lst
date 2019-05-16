@@ -6,6 +6,7 @@ es\deusto\client\BorrarCarrera$1.class
 es\deusto\client\VentanaAdmin.class
 es\deusto\client\VInicio.class
 es\deusto\client\VentanaAdmin$4.class
+es\deusto\client\CrearPatrocinador$1.class
 es\deusto\client\VentanaVer$1.class
 es\deusto\client\BorrarParticipante.class
 es\deusto\client\VentanaMenu$1.class
@@ -28,9 +29,11 @@ es\deusto\client\VentanaPatrocinador$3.class
 es\deusto\client\VRegistro$3.class
 es\deusto\client\VentanaPatrocinador.class
 es\deusto\client\VInicio$2.class
+es\deusto\client\CrearPatrocinador.class
 es\deusto\server\jdo\Usuario.class
 es\deusto\client\VentanaAdmin$2.class
 es\deusto\client\BorrarPatrocinador$2.class
+es\deusto\client\CrearPatrocinador$2.class
 es\deusto\client\VCrearUsuario.class
 es\deusto\client\VentanaMenu.class
 es\deusto\client\AnadirPatrocinador$2.class
@@ -48,4 +51,5 @@ es\deusto\client\VentanaAdmin$5.class
 es\deusto\client\VRegistro$1.class
 es\deusto\client\VentanaPatrocinador$1.class
 es\deusto\client\VInicio$1.class
+es\deusto\client\VentanaPatrocinador$4.class
 es\deusto\client\VRegistro.class

@@ -105,8 +105,8 @@ public class CrearCarrera extends JFrame {
 		JButton btnVolver = new JButton("Volver");
 		btnVolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VentanaMenu m = new VentanaMenu(client , user);
-				m.setVisible(true);
+				VentanaAdmin b = new VentanaAdmin(client, user);
+				b.setVisible(true);
 				CrearCarrera.this.setVisible(false);
 				
 				

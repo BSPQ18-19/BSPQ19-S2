@@ -134,9 +134,18 @@ public class Client {
 		}
 	}
 	
-	public void BorrarPatrocinador   (String cod, String nombre) {
+	public void BorrarPatrocinador   (String cod, String cod1) {
 		try {
-			server.borrarPatrocinador(cod, nombre);
+			server.borrarPatrocinador(cod, cod1);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void crearPatrocinador (String cod, String nombre, double contribucion) {
+		try {
+			server.crearPatrocinador(cod, nombre, contribucion);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -48,7 +48,7 @@ public class BorrarPatrocinador extends JFrame {
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
-		JLabel lblNombrePatrocinador = new JLabel("Nombre Patrocinador ");
+		JLabel lblNombrePatrocinador = new JLabel("Codigo Patrocinador ");
 		lblNombrePatrocinador.setBounds(36, 108, 151, 16);
 		contentPane.add(lblNombrePatrocinador);
 		

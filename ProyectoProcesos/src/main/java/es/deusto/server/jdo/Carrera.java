@@ -40,6 +40,10 @@ public class Carrera implements Serializable{
 		this.premio = premio;
 	}
 	
+	
+	public void setPatrocinadores(Patrocinadores p) {
+		this.patrocinador=p;
+	}
 	//getters y setters cod
 	
 

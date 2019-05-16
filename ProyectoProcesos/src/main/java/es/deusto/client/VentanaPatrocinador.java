@@ -39,9 +39,25 @@ public class VentanaPatrocinador extends JFrame {
 		lblGestionPatrocinadores.setBounds(80, 28, 253, 16);
 		contentPane.add(lblGestionPatrocinadores);
 		
+		JButton btnCrear = new JButton("Crear");
+		btnCrear.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
+		btnCrear.setBounds(157, 60, 117, 29);
+		contentPane.add(btnCrear);
+		btnCrear.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				CrearPatrocinador cp = new CrearPatrocinador(client , user);
+				cp.setVisible(true);
+				VentanaPatrocinador.this.setVisible(false);
+			}
+		});
+		
+		
 		JButton btnAadir = new JButton("Añadir");
 		btnAadir.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		btnAadir.setBounds(157, 89, 117, 29);
+		btnAadir.setBounds(157, 100, 117, 29);
 		contentPane.add(btnAadir);
 		btnAadir.addActionListener(new ActionListener() {
 			
@@ -56,7 +72,7 @@ public class VentanaPatrocinador extends JFrame {
 		
 		JButton btnBorrar = new JButton("Borrar ");
 		btnBorrar.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		btnBorrar.setBounds(157, 151, 117, 29);
+		btnBorrar.setBounds(157, 140, 117, 29);
 		contentPane.add(btnBorrar);
 		btnBorrar.addActionListener(new ActionListener() {
 			
