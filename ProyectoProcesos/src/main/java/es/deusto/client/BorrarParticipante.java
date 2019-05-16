@@ -69,7 +69,7 @@ public class BorrarParticipante extends JFrame {
 		JButton btnBorrar = new JButton("Borrar");
 		btnBorrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				client.BorrarPartcipante(textField.getText(), textField_1.getText());
+				client.BorrarPartcipante(textField_1.getText(), textField.getText());
 			}
 		});
 		btnBorrar.setBounds(306, 230, 117, 29);

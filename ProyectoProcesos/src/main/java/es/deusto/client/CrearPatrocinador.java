@@ -77,13 +77,13 @@ public class CrearPatrocinador extends JFrame {
 		btnVolver.setBounds(25, 232, 117, 29);
 		contentPane.add(btnVolver);
 		
-		JButton btnCrear = new JButton("Crear");
-		btnCrear.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				client.crearPatrocinador(textField.getText(), textField_1.getText(), Double.parseDouble(textField_2.getText()));
-			}
-		});
-		btnCrear.setBounds(287, 232, 117, 29);
-		contentPane.add(btnCrear);
+//		JButton btnCrear = new JButton("Crear");
+//		btnCrear.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				client.crearPatrocinador(textField.getText(), textField_1.getText(), Double.parseDouble(textField_2.getText()));
+//			}
+//		});
+//		btnCrear.setBounds(287, 232, 117, 29);
+//		contentPane.add(btnCrear);
 	}
 }

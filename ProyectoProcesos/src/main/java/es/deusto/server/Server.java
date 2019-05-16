@@ -313,19 +313,40 @@ public class Server extends UnicastRemoteObject implements IServer {
 	public void borrarParticipante(String cod, String email) throws RemoteException {
 		// TODO Auto-generated method stub
 
+
 		Transaction tx = pm.currentTransaction();
+		try {
 
-		tx.begin();
+			tx.begin();
 
-		@SuppressWarnings("unchecked")
-		Query<Carrera> query = pm.newQuery(
-				"SELECT FROM carrera_listausuarios WHERE COD_OID == '" + email + "' AND EMAIL_EID == '" + cod + "' ");
+			Usuario usuario = pm.getObjectById(Usuario.class, email);
 
-		long numberdeleted = query.deletePersistentAll();
+			Extent<Carrera> ext = pm.getExtent(Carrera.class);
 
-		System.out.println(numberdeleted + "Participante borrado");
-		JOptionPane.showMessageDialog(null, "Participante borrado" );
-		tx.commit();
+			Iterator<Carrera> iter = ext.iterator();
+
+			while (iter.hasNext()) {
+				Object obj = iter.next();
+				Carrera c = (Carrera) obj;
+				if (c.getCod().equals(cod)) {
+					c.eliminarParticipante(usuario);
+					System.out.println("carrera: " + c.getNombreC());
+				}
+
+			}
+			JOptionPane.showMessageDialog(null, "Participante eliminado");
+
+			tx.commit();
+
+		} catch (Exception ex) {
+			System.out.println("   $ Error retreiving an extent: " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+		}
+
 	}
 
 	@Override
@@ -409,29 +430,29 @@ public class Server extends UnicastRemoteObject implements IServer {
 		pmf.close();
 	}
 
-	@Override
-	public void crearPatrocinador(String cod, String nombre, double contribucion) throws RemoteException {
-		// TODO Auto-generated method stub
-		pm.getFetchPlan().setMaxFetchDepth(3);
-
-		Transaction tx = pm.currentTransaction();
-
-		try {
-			tx.begin();
-
-			System.out.println("Creating patrocinador: " + cod);
-			Patrocinadores patrocinador = new Patrocinadores(cod, nombre, contribucion);
-			pm.makePersistent(patrocinador);
-			System.out.println("Patrocinador creado: " + nombre);
-			JOptionPane.showMessageDialog(null, "Patrocinador creado: " + cod + " " + nombre);
-
-			tx.commit();
-		} finally {
-			if (tx.isActive()) {
-				tx.rollback();
-			}
-
-		}
-	}
+//	@Override
+//	public void crearPatrocinador(String cod, String nombre, double contribucion) throws RemoteException {
+//		// TODO Auto-generated method stub
+//		pm.getFetchPlan().setMaxFetchDepth(3);
+//
+//		Transaction tx = pm.currentTransaction();
+//
+//		try {
+//			tx.begin();
+//
+//			System.out.println("Creating patrocinador: " + cod);
+//			Patrocinadores patrocinador = new Patrocinadores(cod, nombre, contribucion);
+//			pm.makePersistent(patrocinador);
+//			System.out.println("Patrocinador creado: " + nombre);
+//			JOptionPane.showMessageDialog(null, "Patrocinador creado: " + cod + " " + nombre);
+//
+//			tx.commit();
+//		} finally {
+//			if (tx.isActive()) {
+//				tx.rollback();
+//			}
+//
+//		}
+//	}
 
 }

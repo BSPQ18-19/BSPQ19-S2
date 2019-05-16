@@ -19,7 +19,7 @@ public interface IServer extends Remote {
 	public void incribirse(String cod, String email)throws RemoteException;
 	public void borrarParticipante(String cod, String email)throws RemoteException;
 	public void anyadirPatrocinador(String cod, String nombre, double contribucion) throws RemoteException;
-	public void crearPatrocinador(String cod, String nombre, double contribucion) throws RemoteException;
+//	public void crearPatrocinador(String cod, String nombre, double contribucion) throws RemoteException;
 	public void borrarPatrocinador(String cod, String cod1)throws RemoteException;
 	public void cerrar()throws RemoteException;
 }

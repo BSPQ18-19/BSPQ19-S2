@@ -143,14 +143,14 @@ public class Client {
 		}
 	}
 	
-	public void crearPatrocinador (String cod, String nombre, double contribucion) {
-		try {
-			server.crearPatrocinador(cod, nombre, contribucion);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public void crearPatrocinador (String cod, String nombre, double contribucion) {
+//		try {
+//			server.crearPatrocinador(cod, nombre, contribucion);
+//		} catch (RemoteException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 	
 	public void salir() {
 		try {
