@@ -8,7 +8,7 @@ import es.deusto.server.jdo.Carrera;
 
 public class CarreraTest {
 	
-	Carrera c;
+	private Carrera c;
 	
 	@Before
 	public void setUp() {
@@ -55,7 +55,7 @@ public class CarreraTest {
 	@Test 
 	public void testGetPremio() {
 		
-		assertEquals(1000, c.getPremio(),false);
+		assertEquals(1000, c.getPremio(),100);
 	}
 	*/
 
