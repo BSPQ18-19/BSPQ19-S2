@@ -353,16 +353,48 @@ public class Server extends UnicastRemoteObject implements IServer {
 	public void anyadirPatrocinador(String cod, String nombre, double contribucion) throws RemoteException {
 		// TODO Auto-generated method stub
 
-		Transaction tx = pm.currentTransaction();
-
-		tx.begin();
-
+//		Transaction tx = pm.currentTransaction();
+//
+//		tx.begin();
+//
 		Patrocinadores p = new Patrocinadores(Patrocinadores.codigos, nombre, contribucion);
 
-		pm.makePersistent(p);
-
+		
+//
+//		try {
+//
+//			Extent<Carrera> ext = pm.getExtent(Carrera.class);
+//
+//			Iterator<Carrera> iter = ext.iterator();
+//
+//			while (iter.hasNext()) {
+//				Object obj = iter.next();
+//				Carrera c = (Carrera) obj;
+//				if (c.getCod().equals(cod)) {
+//					c.setPatrocinadores(p);
+//					System.out.println("carrera: " + c.getNombreC());
+//				}
+//				JOptionPane.showMessageDialog(null, "Patrocinador añadido a carrera: " + c.getCod());
+//			}
+//
+//			tx.commit();
+//
+//		} catch (Exception ex) {
+//			System.out.println("   $ Error retreiving an extent: " + ex.getMessage());
+//		} finally {
+//			if (tx != null && tx.isActive()) {
+//				tx.rollback();
+//			}
+//
+//		}
+		
+		Transaction tx = pm.currentTransaction();
 		try {
+			
+			
+			tx.begin();
 
+			pm.makePersistent(p);
 			Extent<Carrera> ext = pm.getExtent(Carrera.class);
 
 			Iterator<Carrera> iter = ext.iterator();
@@ -372,10 +404,14 @@ public class Server extends UnicastRemoteObject implements IServer {
 				Carrera c = (Carrera) obj;
 				if (c.getCod().equals(cod)) {
 					c.setPatrocinadores(p);
+					
+					
 					System.out.println("carrera: " + c.getNombreC());
 				}
-				JOptionPane.showMessageDialog(null, "Patrocinador añadido a carrera: " + c.getCod());
+
 			}
+			JOptionPane.showMessageDialog(null, "Patrocinador añadido");
+			
 
 			tx.commit();
 
@@ -387,6 +423,8 @@ public class Server extends UnicastRemoteObject implements IServer {
 			}
 
 		}
+
+		
 	}
 
 	@Override
